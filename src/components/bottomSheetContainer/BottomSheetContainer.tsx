@@ -42,15 +42,19 @@ function BottomSheetContainerComponent({
 
       containerRef.current?.measure(
         (_x, _y, _width, _height, _pageX, pageY) => {
-          containerOffset.value = {
-            top: pageY,
-            left: 0,
-            right: 0,
-            bottom: Math.max(
-              0,
-              WINDOW_HEIGHT - (pageY + height + (StatusBar.currentHeight ?? 0))
-            ),
-          };
+          try {
+            containerOffset.value = {
+              top: pageY,
+              left: 0,
+              right: 0,
+              bottom: Math.max(
+                0,
+                WINDOW_HEIGHT - (pageY + height + (StatusBar.currentHeight ?? 0))
+              ),
+            };
+          } catch (e) {
+            const error = e;
+          }
         }
       );
 
